@@ -1,0 +1,81 @@
+(===============================================================================
+( Dados de Modelos de Maquinas Sincronas do Sistema-Teste Brasileiro de
+( 33 Barras para simulação no programa ANATEM
+(===============================================================================
+(
+(-----------------------------------------------------------------------
+( Modelos de maquinas com polos salientes (usinas Hidraulicas)
+(-----------------------------------------------------------------------
+DMDG MD02
+(
+(....... UHE Gov. Bento Munhoz
+(No)   (CS) (Xd )(Xq )(X'd)     (X"d)(Xl )(T'd)     (T"d)(T"q)
+ 700    700 91.8968.6330.25     24.2216.13 7.92      0.060.090
+(No)   (Ra )( H )( D )(MVA)Fr C
+ 700        4.439     419.0   N
+(
+(....... UHE Segredo e UHE Salto Caxias
+(No)   (CS) (Xd )(Xq )(X'd)     (X"d)(Xl )(T'd)     (T"d)(T"q)
+ 702    702 87.8556.6124.51     19.8610.35 7.59      0.070.170
+(No)   (Ra )( H )( D )(MVA)Fr C
+ 702        4.071     333.0   N
+(
+(....... UHE Salto Osorio
+(No)   (CS) (Xd )(Xq )(X'd)     (X"d)(Xl )(T'd)     (T"d)(T"q)
+ 805    805 119.959.9630.94     25.4810.92 8.27      0.050.070
+(No)   (Ra )( H )( D )(MVA)Fr C
+ 805        3.620     182.0   N
+(
+(....... UHE Salto Santiago
+(No)   (CS) (Xd )(Xq )(X'd)     (X"d)(Xl )(T'd)     (T"d)(T"q)
+ 807    807 91.7962.2531.65     23.2118.86 10.0     0.0400.130
+(No)   (Ra )( H )( D )(MVA)Fr C
+ 807        3.873     369.8   N
+(
+(....... UHE Ita
+(No)   (CS) (Xd )(Xq )(X'd)     (X"d)(Xl )(T'd)     (T"d)(T"q)
+ 808    808 110.0 73.0 31.0      24.0 16.0 6.90      .043 .040
+(No)   (Ra )( H )( D )(MVA)Fr C
+ 808   0.4204.349     305.0   N
+(
+(....... UHE Machadinho
+(No) O (CS) (Xd )(Xq )(X'd)     (X"d)(Xl )(T'd)     (T"d)(T"q)
+ 815    815 100.0 75.0 32.0      26.0 22.0 6.00     0.0900.090
+(No)   (Ra )( H )( D )(MVA)Fr C
+ 815        4.844     418.5   N
+(
+999999
+(
+(-----------------------------------------------------------------------
+( Dados de Curvas de Saturacao das Maquinas
+(-----------------------------------------------------------------------
+(
+DCST
+(
+(....... UHE Gov. Bento Munhoz
+(No)   T (  Y1  ) (  Y2  ) (  X1  )
+ 700   2   0.0220    7.874      0.8
+(
+(....... UHE Segredo e UHE Salto Caxias
+(No)   T (  Y1  ) (  Y2  ) (  X1  )
+ 702   2   0.0147    7.098      0.8
+(
+(....... UHE Salto Osorio
+(No)   T (  Y1  ) (  Y2  ) (  X1  )
+ 805   2   0.0490    6.640      0.8
+(
+(....... UHE Salto Santiago
+(No)   T (  Y1  ) (  Y2  ) (  X1  )
+ 807   2   0.0460    6.300      0.8
+(
+(....... UHE Ita
+(No)   T (  Y1  ) (  Y2  ) (  X1  )
+ 808   2  0.02707  7.05981      0.8
+(
+(....... UHE Machadinho
+(No)   T (  Y1  ) (  Y2  ) (  X1  )
+ 815   2 0.022924 8.392149      0.8
+(
+999999
+(
+FIM

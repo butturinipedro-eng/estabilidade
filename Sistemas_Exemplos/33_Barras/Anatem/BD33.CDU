@@ -1,0 +1,1276 @@
+(===============================================================================
+( CDU - Controladores das maquinas do Sistema-Teste Brasileiro de
+( 33 Barras para simulação no programa ANATEM
+(===============================================================================
+(
+DCDU
+(
+(----------------------------------------------------------------------
+(ncdu) ( nome cdu )
+   700 RT_GBMUNHOZ
+(----------------------------------------------------------------------
+(EFPAR (npar) (     valpar     )
+(----------------------------------------------------------------------
+DEFPAR #Ka                 190.8
+DEFPAR #Lmax                3.87
+DEFPAR #Lmin               -3.87
+DEFPAR #T2                  12.0
+DEFPAR #T3                  0.07
+DEFPAR #T4              0.013356
+DEFPAR #Ta                  3.00
+DEFPAR #Tse                 0.02
+(
+(----------------------------------------------------------------------
+(nb) (tipo) (stip)s(vent) (vsai) ( p1 )( p2 )( p3 )( p4 ) (vmin) (vmax)
+(----------------------------------------------------------------------
+0001 IMPORT VTR           Vt
+0002 LEDLAG        Vt     X2        1.0         1.0#Tse
+0003 LEDLAG        X2     X3        1.0         1.0#Tse
+0004 ENTRAD               Vref
+0005 SOMA          Vref   X5
+                  -X3     X5
+                   Vsad   X5
+0006 IMPORT VSAD          Vsad
+0007 GANHO         X5     X7     #Ka
+0008 LEDLAG        X7     X8        1.0#Ta      1.0#T2
+0009 LEDLAG        X8     X9        1.0#T3      1.0#T4
+0010 LIMITA        X9     Efd                             Lmin   Lmax
+0011 EXPORT EFD    Efd
+(
+(----------------------------------------------------------------------
+(DEFVA (stip) (vdef) ( d1 )
+(----------------------------------------------------------------------
+DEFVAL        Lmax   #Lmax
+DEFVAL        Lmin   #Lmin
+(
+FIMCDU
+(
+(----------------------------------------------------------------------
+(ncdu) ( nome cdu )
+   704 RT_SEGREDO
+(----------------------------------------------------------------------
+(EFPAR (npar) (     valpar     )
+(----------------------------------------------------------------------
+DEFPAR #A1                 0.016
+DEFPAR #Ka                 200.0
+DEFPAR #Ke                   1.0
+DEFPAR #Tse                 12.0
+DEFPAR #us                   3.0
+DEFPAR #VAmax                4.0
+DEFPAR #VAmin               -3.4
+(
+(----------------------------------------------------------------------
+(nb) (tipo) (stip)s(vent) (vsai) ( p1 )( p2 )( p3 )( p4 ) (vmin) (vmax)
+(----------------------------------------------------------------------
+0001 IMPORT VTR           Vt
+0002 LEDLAG        Vt     X2     #Ke            1.0#A1
+0003 SOMA          Vref   X3
+                   Vsad   X3
+                  -X2     X3
+0004 IMPORT VSAD          Vsad
+0005 ENTRAD               Vref
+0006 GANHO         X3     X6     #Ka
+0007 LEDLAG        X6     X7        1.0#us      1.0#Tse
+0008 MULTPL        X7     X8
+                   Vt     X8
+0009 LIMITA        X11    Efd                             VAmin  VAmax
+0010 EXPORT EFD    Efd
+0011 SOMA          Efd0   X11
+                   X8     X11
+0012 ENTRAD               Efd0
+(
+(----------------------------------------------------------------------
+(DEFVA (stip) (vdef) ( d1 )
+(----------------------------------------------------------------------
+DEFVAL VAR    Efd0   Efd
+DEFVAL        VAmax  #VAmax
+DEFVAL        VAmin  #VAmin
+(
+FIMCDU
+(
+(----------------------------------------------------------------------
+(ncdu) ( nome cdu )
+   706 RT_SCAXIAS
+(----------------------------------------------------------------------
+(EFPAR (npar) (     valpar     )
+(----------------------------------------------------------------------
+DEFPAR #A1                 0.016
+DEFPAR #Ka                 200.0
+DEFPAR #Ke                   1.0
+DEFPAR #Tse                  6.0
+DEFPAR #us                   1.2
+DEFPAR #VAmax                4.0
+DEFPAR #VAmin               -3.4
+(
+(----------------------------------------------------------------------
+(nb) (tipo) (stip)s(vent) (vsai) ( p1 )( p2 )( p3 )( p4 ) (vmin) (vmax)
+(----------------------------------------------------------------------
+0001 IMPORT VTR           Vt
+0002 LEDLAG        Vt     X2     #Ke            1.0#A1
+0003 SOMA          Vref   X3
+                   Vsad   X3
+                  -X2     X3
+0004 IMPORT VSAD          Vsad
+0005 ENTRAD               Vref
+0006 GANHO         X3     X6     #Ka
+0007 LEDLAG        X6     X7        1.0#us      1.0#Tse
+0008 MULTPL        X7     X8
+                   X2     X8
+0009 LIMITA        X11    Efd                             VAmin  VAmax
+0010 EXPORT EFD    Efd
+0011 SOMA          Efd0   X11
+                   X8     X11
+0012 ENTRAD               Efd0
+(
+(----------------------------------------------------------------------
+(DEFVA (stip) (vdef) ( d1 )
+(----------------------------------------------------------------------
+DEFVAL VAR    Efd0   Efd
+DEFVAL        VAmax  #VAmax
+DEFVAL        VAmin  #VAmin
+(
+FIMCDU
+(
+(----------------------------------------------------------------------
+(ncdu) ( nome cdu )
+   806 RT_S.OSORIO
+(----------------------------------------------------------------------
+(EFPAR (npar) (     valpar     )
+(----------------------------------------------------------------------
+DEFPAR #Ka                250.52
+DEFPAR #Ke                 25.95
+DEFPAR #Ta                  0.06
+DEFPAR #Te                   0.3
+DEFPAR #Tq                 0.008
+DEFPAR #Tse                 0.47
+DEFPAR #us                 0.002
+DEFPAR #VAmax               4.54
+DEFPAR #VAmin              -3.39
+(
+(----------------------------------------------------------------------
+(nb) (tipo) (stip)s(vent) (vsai) ( p1 )( p2 )( p3 )( p4 ) (vmin) (vmax)
+(----------------------------------------------------------------------
+0001 IMPORT VTR           Vt
+0002 ENTRAD               Vt0
+0003 DIVSAO        Vt     X3
+                   Vt0    X3
+0004 FUNCAO RETA   X3     X4       -1.0   1.0
+0005 ENTRAD               Vref
+0006 SOMA         -X9     X6
+                   X4     X6
+                   Vref   X6
+0007 LEDLAG        X6     X7     #Ka            1.0#Ta
+0008 SOMA          Vsad   X8
+                   X7     X8
+0009 WSHOUT        X8     X9     #us      1.0#Tse
+0010 IMPORT VSAD          Vsad
+0011 SOMA         -X16    X11
+                   X8     X11
+0012 LEDLAG        X11    X12    #Ke            1.0#Te
+0013 LIMITA        X12    Efd                             Efdmin Efdmax
+0014 GANHO         Vt     Efdmax #VAmax
+0015 GANHO         Vt     Efdmin #VAmin
+0016 LEDLAG        Efd    X16       1.0         1.0#Tq
+0017 EXPORT EFD    Efd
+(
+(----------------------------------------------------------------------
+(DEFVA (stip) (vdef) ( d1 )
+(----------------------------------------------------------------------
+DEFVAL VAR    Vt0    Vt
+(
+FIMCDU
+(
+(----------------------------------------------------------------------
+(ncdu) ( nome cdu )
+   810 RT_SSANTIAGO
+(----------------------------------------------------------------------
+(EFPAR (npar) (     valpar     )
+(----------------------------------------------------------------------
+DEFPAR #Cte                0.926
+DEFPAR #K                   3.15
+DEFPAR #K1                  7.86
+DEFPAR #Ka                 78.48
+DEFPAR #Kc                 0.238
+DEFPAR #Ke                 8.864
+DEFPAR #Kr                 0.826
+DEFPAR #T                    0.2
+DEFPAR #Ta                 0.022
+DEFPAR #Tse                 0.95
+DEFPAR #us                 0.067
+DEFPAR #VAmax               6.38
+DEFPAR #VAmin              -6.38
+(
+(----------------------------------------------------------------------
+(nb) (tipo) (stip)s(vent) (vsai) ( p1 )( p2 )( p3 )( p4 ) (vmin) (vmax)
+(----------------------------------------------------------------------
+0001 IMPORT VTR           Vt
+0002 ENTRAD               Vref
+0003 IMPORT VSAD          Vsad
+0004 SOMA         -Vt     X4
+                   Vref   X4
+                   Vsad   X4
+                  -X7     X4
+0005 LEDLAG        X4     X5     #Ka            1.0#Ta
+0006 MAX           X5     X6
+                   X22    X6
+0007 WSHOUT        X6     X7     #us      1.0#Tse
+0008 GANHO         X7     X8     #K1
+0009 FRACAO        Vt     X9     #Kc   #Kr      1.0
+0010 GANHO         Vt     X10    #Kc
+0011 IMPORT QELE          Qe
+0012 GANHO         Qe     X12    #Cte
+0013 SOMA          X10    X13
+                  -X12    X13
+0014 FUNCAO X**2   X13    X14
+0015 IMPORT PELE          Pe
+0016 GANHO         Pe     X16    #Cte
+0017 FUNCAO X**2   X16    X17
+0018 SOMA          X14    X18
+                   X17    X18
+0019 FUNCAO SQRT   X18    X19
+0020 SOMA         -X8     X20
+                  -X9     X20
+                   X19    X20
+0021 LEDLAG        X20    X21     1.930         1.0#T
+0022 GANHO         X21    X22    #K
+0023 LEDLAG        Vt     X23       1.0         1.0 0.235
+0024 ENTRAD               X24
+0025 SOMA          X24    X25
+                  -X23    X25
+                   X6     X25
+0026 GANHO         X25    X26    #Ke
+0028 LIMITA        X26    Efd                             Efdmin Efdmax
+0030 EXPORT EFD    Efd
+0031 GANHO         Vt     Efdmax #VAmax
+0032 GANHO         Vt     Efdmin #VAmin
+(
+(----------------------------------------------------------------------
+(DEFVA (stip) (vdef) ( d1 )
+(----------------------------------------------------------------------
+DEFVAL VAR    Vref   Vt
+(
+FIMCDU
+(
+(----------------------------------------------------------------------
+(ncdu) ( nome cdu )
+   812 RT_ITA
+(----------------------------------------------------------------------
+(EFPAR (npar) (     valpar     )
+(----------------------------------------------------------------------
+DEFPAR #TR                  0.02 Measuring filter time constant
+DEFPAR #TS                 0.003 Power converter and firing unit time constant
+DEFPAR #KIR                 0.00 Influence of reactive power
+DEFPAR #KIA                 0.00 Influence of active power
+DEFPAR #KR                 100.0 Static gain of AVR
+DEFPAR #TC2                 0.08 Lead-lag Stages time constant
+DEFPAR #TB2                 0.08 Lead-lag Stages time constant
+DEFPAR #TC1                 1.00 Lead-lag Stages time constant
+DEFPAR #TB1                 1.67 Lead-lag Stages time constant
+DEFPAR #Up+                 6.79
+DEFPAR #Up-                -5.43
+DEFPAR #KCO                  0.0 Voltage drop due to thyristors commutation
+(
+(----------------------------------------------------------------------
+(nb) (tipo) (stip)s(vent) (vsai) ( p1 )( p2 )( p3 )( p4 ) (vmin) (vmax)
+(----------------------------------------------------------------------
+0001 IMPORT VTR           Vt
+0002 IMPORT PELE          Pe
+0003 IMPORT QELE          Qe
+0004 IMPORT IFD           Ifd
+0005 IMPORT VSAD          Vsad
+0006 ENTRAD               Vref
+0007*ENTRAD               Up+
+0008*ENTRAD               Up-
+0009 LEDLAG        Vt     Vtf       1.0         1.0#TR
+0010 GANHO         Pe     X10    #KIA
+0011 GANHO         Qe     X11    #KIR
+0012 SOMA          Vref   erro
+                  -Vtf    erro
+                   X10    erro
+                   X11    erro
+                   Vsad   erro
+0013 LEDLAG        erro   X13       1.0#TC2     1.0#TB2   Inf    Sup
+0014 LEDLAG        X13    X14       1.0#TC1     1.0#TB1   Up-/KR Up+/KR
+0015 GANHO         X14    X15    #KR
+0016 LIMITA        X15    X16                             Up-    Up+
+0017 LEDLAG        X16    Up        1.0         1.0#TS    Up-*Vt Up+*Vt
+0018 FRACAO        Up+    Up+/KR    1.0      #KR
+0019 FRACAO        Up+/KR Sup    #TB1        #TC1
+0020 FRACAO        Up-    Up-/KR    1.0      #KR
+0021 FRACAO        Up-/KR Inf    #TB1        #TC1
+0022 GANHO         Vt     Up+*Vt #Up+
+0023 GANHO         Vt     Up-*Vt #Up-
+0024 GANHO         Ifd    X24    #KCO
+0025 SOMA          Up     Efd
+                  -X24    Efd
+0026 EXPORT EFD    Efd
+(
+(----------------------------------------------------------------------
+(DEFVA (stip) (vdef) ( d1 )
+(----------------------------------------------------------------------
+DEFVAL        Up+    #Up+
+DEFVAL        Up-    #Up-
+(
+FIMCDU
+(
+(----------------------------------------------------------------------
+(ncdu) ( nome cdu )
+   815 RT_Machadinh
+(----------------------------------------------------------------------
+(EFPAR (npar) (     valpar     )
+(----------------------------------------------------------------------
+DEFPAR #Ka                  10.0
+DEFPAR #Kb                   3.0
+DEFPAR #Kc                   1.0
+DEFPAR #T1                  0.02
+DEFPAR #T2                  0.50
+DEFPAR #T3                  0.02
+DEFPAR #Tb                0.0014
+DEFPAR #VAmax               1.00
+DEFPAR #VAmin              -1.00
+(
+(----------------------------------------------------------------------
+(nb) (tipo) (stip)s(vent) (vsai) ( p1 )( p2 )( p3 )( p4 ) (vmin) (vmax)
+(----------------------------------------------------------------------
+0001 IMPORT VOLT          Vt
+0002 ENTRAD               Vref
+0003 LEDLAG        Vt     X3        1.0         1.0#T1
+0004 SOMA         -X3     X4
+                   Vref   X4
+0005 GANHO         X4     X5     #Ka
+0006 PROINT        X5     X6        1.0#T2      #T2
+0018 IMPORT VSAD          Vsad
+0007 SOMA          X6     X7
+                   Vsad   X7
+0008 GANHO         X7     X8        2.0
+0009 SOMA          X8     X9
+                  -X13    X9
+0010 LIMITA        X9     X10                             VAmin  VAmax
+0110 FUNCAO RAMPA  X10    ALFA     -1.03.1416   1.0   0.0
+0111 FUNCAO COS    ALFA   COSA
+0011 LEDLAG        COSA   X11    #Kb            1.0#Tb
+0012 MULTPL        X11    X12
+                   Vt     X12
+0013 LEDLAG        X12    X13       1.0         1.0#T3
+0014 GANHO         X12    Efd    #Kc
+0017 EXPORT EFD    Efd
+(
+(----------------------------------------------------------------------
+(DEFVA (stip) (vdef) ( d1 )
+(----------------------------------------------------------------------
+DEFVAL        VAmax  #VAmax
+DEFVAL        VAmin  #VAmin
+(
+FIMCDU
+(
+(----------------------------------------------------------------------
+(ncdu) ( nome cdu )
+   740 RV_GBMUNHOZ
+(----------------------------------------------------------------------
+(EFPAR (npar) (     valpar     )
+(----------------------------------------------------------------------
+DEFPAR #At                   1.2
+DEFPAR #D                    1.0
+DEFPAR #Dt                   0.5
+DEFPAR #Lmax               0.984
+DEFPAR #Lmin                 0.0
+DEFPAR #PBmaq               419.
+DEFPAR #PBtur               419.
+DEFPAR #Qnl                 0.15
+DEFPAR #R                   0.05
+DEFPAR #rp                  0.38
+DEFPAR #Tf                  0.05
+DEFPAR #Tg                   0.5
+DEFPAR #Tr                   7.0
+DEFPAR #Tw                   1.5
+(
+(----------------------------------------------------------------------
+(nb) (tipo) (stip)s(vent) (vsai) ( p1 )( p2 )( p3 )( p4 ) (vmin) (vmax)
+(----------------------------------------------------------------------
+0001 IMPORT DWMAQ         Dw
+0002 ENTRAD               Wref
+0003 SOMA         -X8     X3
+                   Wref   X3
+                  -Dw     X3
+0004 LEDLAG        X3     X4        1.0         1.0#Tf
+0005 FRACAO        X4     X5        1.0      #rp
+0006 PROINT        X5     X6        1.0#Tr   #Tr
+0007 LIMITA        X6     X7                              Lmin   Lmax
+0008 GANHO         X7     X8     #R
+0009 LEDLAG        X7     X9        1.0         1.0#Tg
+0010 GANHO         Dw     X10    #D
+0011 SOMA         -X10    X11
+                  -X23    X11
+                   X21    X11
+0012 EXPORT PMEC   Pmec
+0013 DIVSAO        X17    X13
+                   X9     X13
+0014 FUNCAO X**2   X13    X14
+0015 FUNCAO RETA   X14    X15      -1.0   1.0
+0017 PROINT        X15    X17       1.0      #Tw
+0018 FUNCAO RETA   X17    X18       1.0-#Qnl
+0020 MULTPL        X18    X20
+                   X14    X20
+0021 GANHO         X20    X21    #At
+0022 MULTPL        X7     X22
+                   Dw     X22
+0023 GANHO         X22    X23    #Dt
+0024 FRACAO        X11    Pmec   #PBtur      #PBmaq
+(
+(----------------------------------------------------------------------
+(DEFVA (stip) (vdef) ( d1 )
+(----------------------------------------------------------------------
+DEFVAL        Lmax   #Lmax
+DEFVAL        Lmin   #Lmin
+(
+FIMCDU
+(
+(----------------------------------------------------------------------
+(ncdu) ( nome cdu )
+   744 RV_SEGREDO
+(----------------------------------------------------------------------
+(EFPAR (npar) (     valpar     )
+(----------------------------------------------------------------------
+DEFPAR #At                   1.2
+DEFPAR #D                    1.0
+DEFPAR #Dt                   0.5
+DEFPAR #Lmax               0.984
+DEFPAR #Lmin                 0.0
+DEFPAR #PBmaq               333.
+DEFPAR #PBtur               315.
+DEFPAR #Qnl                 0.15
+DEFPAR #R                   0.05
+DEFPAR #rp                  0.38
+DEFPAR #Tf                  0.05
+DEFPAR #Tg                   0.5
+DEFPAR #Tr                   7.0
+DEFPAR #Tw                   1.5
+(
+(----------------------------------------------------------------------
+(nb) (tipo) (stip)s(vent) (vsai) ( p1 )( p2 )( p3 )( p4 ) (vmin) (vmax)
+(----------------------------------------------------------------------
+0001 IMPORT DWMAQ         Dw
+0002 ENTRAD               Wref
+0003 SOMA         -X8     X3
+                   Wref   X3
+                  -Dw     X3
+0004 LEDLAG        X3     X4        1.0         1.0#Tf
+0005 FRACAO        X4     X5        1.0      #rp
+0006 PROINT        X5     X6        1.0#Tr   #Tr
+0007 LIMITA        X6     X7                              Lmin   Lmax
+0008 GANHO         X7     X8     #R
+0009 LEDLAG        X7     X9        1.0         1.0#Tg
+0010 GANHO         Dw     X10    #D
+0011 SOMA         -X10    X11
+                  -X23    X11
+                   X21    X11
+0012 EXPORT PMEC   Pmec
+0013 DIVSAO        X17    X13
+                   X9     X13
+0014 FUNCAO X**2   X13    X14
+0015 FUNCAO RETA   X14    X15      -1.0   1.0
+0017 PROINT        X15    X17       1.0      #Tw
+0018 FUNCAO RETA   X17    X18       1.0-#Qnl
+0020 MULTPL        X18    X20
+                   X14    X20
+0021 GANHO         X20    X21    #At
+0022 MULTPL        X7     X22
+                   Dw     X22
+0023 GANHO         X22    X23    #Dt
+0024 FRACAO        X11    Pmec   #PBtur      #PBmaq
+(
+(----------------------------------------------------------------------
+(DEFVA (stip) (vdef) ( d1 )
+(----------------------------------------------------------------------
+DEFVAL        Lmax   #Lmax
+DEFVAL        Lmin   #Lmin
+(
+FIMCDU
+(
+(----------------------------------------------------------------------
+(ncdu) ( nome cdu )
+   746 RV_S.CAXIAS
+(----------------------------------------------------------------------
+(EFPAR (npar) (     valpar     )
+(----------------------------------------------------------------------
+DEFPAR #At                   1.2
+DEFPAR #D                    1.0
+DEFPAR #Dt                   0.5
+DEFPAR #Lmax               0.986
+DEFPAR #Lmin                 0.0
+DEFPAR #PBmaq               345.
+DEFPAR #PBtur               310.
+DEFPAR #Qnl                 0.15
+DEFPAR #R                   0.05
+DEFPAR #rp                  0.50
+DEFPAR #Tf                  0.05
+DEFPAR #Tg                   0.5
+DEFPAR #Tr                   7.0
+DEFPAR #Tw                   1.5
+(
+(----------------------------------------------------------------------
+(nb) (tipo) (stip)s(vent) (vsai) ( p1 )( p2 )( p3 )( p4 ) (vmin) (vmax)
+(----------------------------------------------------------------------
+0001 IMPORT DWMAQ         Dw
+0002 ENTRAD               Wref
+0003 SOMA         -X8     X3
+                   Wref   X3
+                  -Dw     X3
+0004 LEDLAG        X3     X4        1.0         1.0#Tf
+0005 FRACAO        X4     X5        1.0      #rp
+0006 PROINT        X5     X6        1.0#Tr   #Tr
+0007 LIMITA        X6     X7                              Lmin   Lmax
+0008 GANHO         X7     X8     #R
+0009 LEDLAG        X7     X9        1.0         1.0#Tg
+0010 GANHO         Dw     X10    #D
+0011 SOMA         -X10    X11
+                  -X23    X11
+                   X21    X11
+0012 EXPORT PMEC   Pmec
+0013 DIVSAO        X17    X13
+                   X9     X13
+0014 FUNCAO X**2   X13    X14
+0015 FUNCAO RETA   X14    X15      -1.0   1.0
+0017 PROINT        X15    X17       1.0      #Tw
+0018 FUNCAO RETA   X17    X18       1.0-#Qnl
+0020 MULTPL        X18    X20
+                   X14    X20
+0021 GANHO         X20    X21    #At
+0022 MULTPL        X7     X22
+                   Dw     X22
+0023 GANHO         X22    X23    #Dt
+0024 FRACAO        X11    Pmec   #PBtur   0.0#PBmaq   0.0
+(
+(----------------------------------------------------------------------
+(DEFVA (stip) (vdef) ( d1 )
+(----------------------------------------------------------------------
+DEFVAL        Lmax   #Lmax
+DEFVAL        Lmin   #Lmin
+(
+FIMCDU
+(
+(----------------------------------------------------------------------
+(ncdu) ( nome cdu )
+   770 ES_GBMUNHOZ
+(----------------------------------------------------------------------
+(EFPAR (npar) (     valpar     )
+(----------------------------------------------------------------------
+DEFPAR #B2                  0.05
+DEFPAR #B3                 -0.05
+DEFPAR #Ki                  1.50
+DEFPAR #Kp                  12.0
+DEFPAR #Kq1                  0.5
+DEFPAR #Kq2                 20.0
+DEFPAR #Tse                 0.02
+(
+(----------------------------------------------------------------------
+(nb) (tipo) (stip)s(vent) (vsai) ( p1 )( p2 )( p3 )( p4 ) (vmin) (vmax)
+(----------------------------------------------------------------------
+0001 IMPORT PELE          Pe
+0002 LEDLAG        Pe     X2       -1.0         1.0#Tse
+0003 WSHOUT        X2     X3     #Ki      1.0#Ki
+0004 GANHO         X3     X4     #Kq1
+0005 SOMA          X4     X5
+                   X6     X5
+0006 LEDLAG        X3     X6     #Kq2           1.0#Kp
+0007 LIMITA        X5     Vsad                            B3     B2
+0008 EXPORT VSAD   Vsad
+(
+(----------------------------------------------------------------------
+(DEFVA (stip) (vdef) ( d1 )
+(----------------------------------------------------------------------
+DEFVAL        B2     #B2
+DEFVAL        B3     #B3
+(
+FIMCDU
+(
+(----------------------------------------------------------------------
+(ncdu) ( nome cdu )
+   774 ES_SEGREDO
+(----------------------------------------------------------------------
+(EFPAR (npar) (     valpar     )
+(----------------------------------------------------------------------
+DEFPAR #B2                   0.1
+DEFPAR #B3                  -0.1
+DEFPAR #Ki                   2.0
+DEFPAR #Kp                 0.103
+DEFPAR #Kp4                0.412
+DEFPAR #Kq1               0.1898
+DEFPAR #Kq2               0.0413
+DEFPAR #Te                   2.0
+DEFPAR #Tq                  10.0
+(
+(----------------------------------------------------------------------
+(nb) (tipo) (stip)s(vent) (vsai) ( p1 )( p2 )( p3 )( p4 ) (vmin) (vmax)
+(----------------------------------------------------------------------
+0001 IMPORT DWMAQ         Dw
+0002 IMPORT PELE          Pe
+0003 WSHOUT        Dw     X3     #Te      1.0#Te
+0004 WSHOUT        X3     X4     #Ki      1.0#Ki
+0005 SOMA          X4     X5
+                   X8     X5
+0006 WSHOUT        Pe     X6     #Te      1.0#Te
+0007 LEDLAG        X6     X7     #Ki            1.0#Ki
+0008 GANHO         X7     X8      0.125
+0009 LEDLAG        X5     X9        1.0#Kp4     1.0#Kp
+0010 LEDLAG        X9     X10       1.0         1.0#Kp
+0011 LEDLAG        X10    X11       1.0         1.0#Kp
+0012 LEDLAG        X11    X12       1.0         1.0#Kp
+0013 SOMA          X12    X13
+                  -X8     X13
+0014 LEDLAG        X13    X14       1.0#Kq1     1.0#Kq2
+0015 LEDLAG        X14    X15       1.0#Kq1     1.0#Kq2
+0016 GANHO         X15    X16    #Tq
+0017 LIMITA        X16    Vsad                            B3     B2
+0018 EXPORT VSAD   Vsad
+(
+(----------------------------------------------------------------------
+(DEFVA (stip) (vdef) ( d1 )
+(----------------------------------------------------------------------
+DEFVAL        B2     #B2
+DEFVAL        B3     #B3
+(
+FIMCDU
+(
+(----------------------------------------------------------------------
+(ncdu) ( nome cdu )
+   776 ES_SCAXIAS
+(----------------------------------------------------------------------
+(EFPAR (npar) (     valpar     )
+(----------------------------------------------------------------------
+DEFPAR #B2                   0.1
+DEFPAR #B3                  -0.1
+DEFPAR #Ki                   5.0
+DEFPAR #Kp                   0.1
+DEFPAR #Kq1                 0.36
+DEFPAR #Kq2                 0.12
+DEFPAR #Kq3                 0.36
+DEFPAR #Kq4                 0.12
+DEFPAR #Te                  10.2
+DEFPAR #Tq                   3.0
+(
+(----------------------------------------------------------------------
+(nb) (tipo) (stip)s(vent) (vsai) ( p1 )( p2 )( p3 )( p4 ) (vmin) (vmax)
+(----------------------------------------------------------------------
+0001 IMPORT DWMAQ         Dw
+0002 IMPORT PELE          Pe
+0003 WSHOUT        Dw     X3     #Te      1.0#Te
+0004 GANHO         X3     X4        1.0
+0005 SOMA          X4     X5
+                   X8     X5
+0006 WSHOUT        Pe     X6     #Te      1.0#Te
+0007 LEDLAG        X6     X7        1.0         1.0#Ki
+0008 GANHO         X7     X8      0.715
+0009 LEDLAG        X5     X9        1.0         1.0#Kp
+0010 LEDLAG        X9     X10       1.0         1.0#Kp
+0011 LEDLAG        X10    X11       1.0         1.0#Kp
+0012 LEDLAG        X11    X12       1.0         1.0#Kp
+0013 LEDLAG        X12    X13       1.0         1.0#Kp
+0014 SOMA          X13    X14
+                  -X8     X14
+0015 LEDLAG        X14    X15       1.0#Kq1     1.0#Kq2
+0016 LEDLAG        X15    X16       1.0#Kq3     1.0#Kq4
+0017 GANHO         X16    X17    #Tq
+0018 LIMITA        X17    Vsad                            B3     B2
+0019 EXPORT VSAD   Vsad
+(
+(----------------------------------------------------------------------
+(DEFVA (stip) (vdef) ( d1 )
+(----------------------------------------------------------------------
+DEFVAL        B2     #B2
+DEFVAL        B3     #B3
+(
+FIMCDU
+(
+(----------------------------------------------------------------------
+(ncdu) ( nome cdu )
+   846 RV_S.OSORIO
+(----------------------------------------------------------------------
+(EFPAR (npar) (     valpar     )
+(----------------------------------------------------------------------
+DEFPAR #At                   1.2
+DEFPAR #D                    1.0
+DEFPAR #Dt                   0.5
+DEFPAR #Lmax               0.984
+DEFPAR #Lmin                 0.0
+DEFPAR #PBmaq              182.0
+DEFPAR #PBtur              182.0
+DEFPAR #Qnl                 0.15
+DEFPAR #R                   0.05
+DEFPAR #rp                  0.38
+DEFPAR #Tf                  0.05
+DEFPAR #Tg                   0.5
+DEFPAR #Tr                   7.0
+DEFPAR #Tw                   1.5
+(
+(----------------------------------------------------------------------
+(nb) (tipo) (stip)s(vent) (vsai) ( p1 )( p2 )( p3 )( p4 ) (vmin) (vmax)
+(----------------------------------------------------------------------
+0001 IMPORT DWMAQ         Dw
+0002 ENTRAD               Wref
+0003 SOMA         -X8     X3
+                   Wref   X3
+                  -Dw     X3
+0004 LEDLAG        X3     X4        1.0         1.0#Tf
+0005 FRACAO        X4     X5        1.0      #rp
+0006 PROINT        X5     X6        1.0#Tr   #Tr
+0007 LIMITA        X6     X7                              Lmin   Lmax
+0008 GANHO         X7     X8     #R
+0009 LEDLAG        X7     X9        1.0         1.0#Tg
+0010 GANHO         Dw     X10    #D
+0011 SOMA         -X10    X11
+                  -X23    X11
+                   X21    X11
+0012 EXPORT PMEC   Pmec
+0013 DIVSAO        X17    X13
+                   X9     X13
+0014 FUNCAO X**2   X13    X14
+0015 FUNCAO RETA   X14    X15      -1.0   1.0
+0017 PROINT        X15    X17       1.0      #Tw
+0018 FUNCAO RETA   X17    X18       1.0-#Qnl
+0020 MULTPL        X18    X20
+                   X14    X20
+0021 GANHO         X20    X21    #At
+0022 MULTPL        X7     X22
+                   Dw     X22
+0023 GANHO         X22    X23    #Dt
+0024 FRACAO        X11    Pmec   #PBtur      #PBmaq
+(
+(----------------------------------------------------------------------
+(DEFVA (stip) (vdef) ( d1 )
+(----------------------------------------------------------------------
+DEFVAL        Lmax   #Lmax
+DEFVAL        Lmin   #Lmin
+(
+FIMCDU
+(
+(----------------------------------------------------------------------
+(ncdu) ( nome cdu )
+   850 RV_SSANTIAGO
+(----------------------------------------------------------------------
+(EFPAR (npar) (     valpar     )
+(----------------------------------------------------------------------
+DEFPAR #At                   1.2
+DEFPAR #D                    1.0
+DEFPAR #Dt                   0.5
+DEFPAR #Lmax               0.984
+DEFPAR #Lmin                 0.0
+DEFPAR #PBmaq              369.8
+DEFPAR #PBtur              355.0
+DEFPAR #Qnl                 0.15
+DEFPAR #R                   0.05
+DEFPAR #rp                  0.38
+DEFPAR #Tf                  0.05
+DEFPAR #Tg                   0.5
+DEFPAR #Tr                   7.0
+DEFPAR #Tw                   1.5
+(
+(----------------------------------------------------------------------
+(nb) (tipo) (stip)s(vent) (vsai) ( p1 )( p2 )( p3 )( p4 ) (vmin) (vmax)
+(----------------------------------------------------------------------
+0001 IMPORT DWMAQ         Dw
+0002 ENTRAD               Wref
+0003 SOMA         -X8     X3
+                   Wref   X3
+                  -Dw     X3
+0004 LEDLAG        X3     X4        1.0         1.0#Tf
+0005 FRACAO        X4     X5        1.0      #rp
+0006 PROINT        X5     X6        1.0#Tr   #Tr
+0007 LIMITA        X6     X7                              Lmin   Lmax
+0008 GANHO         X7     X8     #R
+0009 LEDLAG        X7     X9        1.0         1.0#Tg
+0010 GANHO         Dw     X10    #D
+0011 SOMA         -X10    X11
+                  -X23    X11
+                   X21    X11
+0012 EXPORT PMEC   Pmec
+0013 DIVSAO        X17    X13
+                   X9     X13
+0014 FUNCAO X**2   X13    X14
+0015 FUNCAO RETA   X14    X15      -1.0   1.0
+0017 PROINT        X15    X17       1.0      #Tw
+0018 FUNCAO RETA   X17    X18       1.0-#Qnl
+0020 MULTPL        X18    X20
+                   X14    X20
+0021 GANHO         X20    X21    #At
+0022 MULTPL        X7     X22
+                   Dw     X22
+0023 GANHO         X22    X23    #Dt
+0024 FRACAO        X11    Pmec   #PBtur      #PBmaq
+(
+(----------------------------------------------------------------------
+(DEFVA (stip) (vdef) ( d1 )
+(----------------------------------------------------------------------
+DEFVAL        Lmax   #Lmax
+DEFVAL        Lmin   #Lmin
+(
+FIMCDU
+(
+(----------------------------------------------------------------------
+(ncdu) ( nome cdu )
+   852 RV_ITA
+(----------------------------------------------------------------------
+(EFPAR (npar) (     valpar     )
+(----------------------------------------------------------------------
+DEFPAR #Pbg                305.0
+DEFPAR #Pbt              294.823
+DEFPAR #Kpf                  5.0
+DEFPAR #Kprp                0.25
+DEFPAR #Kprv                1.50
+DEFPAR #Kip                  2.0
+DEFPAR #Kif                  2.0
+DEFPAR #Kirp                 0.8
+DEFPAR #Kirv                0.15
+DEFPAR #KpapK               33.4   20*1.67
+DEFPAR #KpavK               50.1   30*1.67
+DEFPAR #Kih                  5.0
+(DEFPAR #dw/dt              -10.0 taxa para chaveamento reg. pot./vel.
+DEFPAR #dw/dt          -100000.0 regulacao em potencia sempre
+DEFPAR #Cont                 0.0 0-sistema interligado 1-sistema isolado
+DEFPAR #TPm                0.020 Constante de tempo do filtro de Pm
+DEFPAR #dgamn               0.00 Abertura minima do distribuidor
+DEFPAR #dgamx               1.08 Abertura maxima do distribuidor
+DEFPAR #Pmin              -9999. Potencia minima
+DEFPAR #Pmax               9999. Potencia maxima
+(
+(----------------------------------------------------------------------
+(nb) (tipo) (stip)s(vent) (vsai) ( p1 )( p2 )( p3 )( p4 ) (vmin) (vmax)
+(----------------------------------------------------------------------
+0001 IMPORT DWMAQ         Dw
+0002 IMPORT WMAQ          w
+0003 IMPORT DT            Dt
+0004 ENTRAD               Pref
+0005 ENTRAD               wref
+1005 SOMA          Dw     X1005
+0006 GANHO         X1005  X6     #Kpf
+0007 SOMA          Pref   X7
+                  -X6     X7
+                  -X8     X7
+0008 LEDLAG        Pm     X8     #Kip        #Kip     1.0
+0009 GANHO         X7     X9     #Kprp
+0010 PROINT        X9     X10    #Kirp    1.0   1.0
+0011 LEDLAG        X10    X11    #KpapK      #KpapK   1.0
+0012 LEDLAG        w      X12    #Kif        #Kif     1.0
+0013 SOMA         -X12    X13
+                   wref   X13
+0014 GANHO         X13    X14    #Kprv
+0015 PROINT        X14    X15    #Kirv    1.0   1.0
+0016 LEDLAG        X15    X16    #KpavK      #KpavK   1.0
+0017 DIVSAO        Dw     X17
+                   Dt     X17
+0018 FUNCAO ABS    X17    X18
+0019 FUNCAO RETA   X18    Set       1.0#dw/dt
+0020 ENTRAD               Reset
+0021 LOGIC  FFLOP1 Reset  Cont
+                   Set    Cont
+0022 SELET2        X11    X22
+                   X16    X22
+                   Cont   X22
+0023 LEDLAG        X22    dga    #Kih        #Kih     1.0 dgamn  dgamx
+0024*FUNCAO PONTOS P0     dga0     0.10 0.133  0.25 0.311
+                                   0.50 0.480  0.75 0.677
+                                   1.00 1.000  1.07 1.080
+0025 SOMA          dga    X25
+                  -dga0   X25
+0026 FUNCAO PONTOS Pmf    A0m      0.10  1.07  0.25  1.17
+                                   0.50  1.30  0.75  1.11
+                                   1.00  0.80  1.07  0.67
+0027 FUNCAO PONTOS Pmf    A1m2Tw   0.10  1.58  0.25  1.94
+                                   0.50  2.15  0.75  2.16
+                                   1.00  1.72  1.07  1.52
+0028 FUNCAO PONTOS Pmf    D/Tw     0.10  7.19  0.25  2.98
+                                   0.50  1.87  0.75  1.33
+                                   1.00  0.97  1.07  0.85
+0029 MULTPL        X25    X29
+                   A0m    X29
+0030 MULTPL        X25    X30
+                   A1m2Tw X30
+0031 SOMA          X29    X31
+                  -X33    X31
+0032 PROINT        X31    X32       1.0         1.0
+0033 MULTPL        X32    X33
+                   D/Tw   X33
+0034 MULTPL        X36    X34
+                   D/Tw   X34
+0035 SOMA         -X30    X35
+                  -X34    X35
+0036 PROINT        X35    X36       1.0         1.0
+0037 FUNCAO PONTOS Pmf    A0x      0.10  0.23  0.25  0.47
+                                   0.50  0.78  0.75  0.94
+                                   1.00  0.99  1.07  1.00
+0038 FUNCAO PONTOS Pmf    A1x2Tw   0.10 -0.09  0.25 -0.18
+                                   0.50 -0.37  0.75 -0.49
+                                   1.00 -0.74  1.07 -0.72
+0039 MULTPL        Dw     X39
+                   A0x    X39
+0040 MULTPL        Dw     X40
+                   A1x2Tw X40
+0041 SOMA          X39    X41
+                  -X43    X41
+0042 PROINT        X41    X42       1.0         1.0
+0043 MULTPL        X42    X43
+                   D/Tw   X43
+0044 MULTPL        X46    X44
+                   D/Tw   X44
+0045 SOMA         -X40    X45
+                  -X44    X45
+0046 PROINT        X45    X46       1.0         1.0
+0047 SOMA          X33    X47
+                   X35    X47
+                  -X43    X47
+                  -X45    X47
+                   P0     X47
+0048*ENTRAD               P0
+0049 GANHO         P0     Pmf       1.0                                 ativar este bloco se nao quiser variacao com Pm
+0050 FRACAO        Pm     Pmec   #Pbt        #Pbg
+0051 EXPORT PMEC   Pmec
+0052 LIMITA        X47    Pm                              Pmin   Pmax
+(
+(----------------------------------------------------------------------
+(DEFVA (stip) (vdef) ( d1 )
+(----------------------------------------------------------------------
+DEFVAL VAR    P0     Pm
+DEFVAL VAR    dga    dga0
+DEFVAL VAR    X11    X22
+DEFVAL VAR    X16    X22
+DEFVAL        wref      1.0
+DEFVAL        Reset     0.0
+DEFVAL        Cont   #Cont
+DEFVAL        dgamn  #dgamn
+DEFVAL        dgamx  #dgamx
+DEFVAL        Pmin   #Pmin
+DEFVAL        Pmax   #Pmax
+(
+FIMCDU
+(
+(----------------------------------------------------------------------
+(ncdu) ( nome cdu )
+   855 RV_Machadinh
+(----------------------------------------------------------------------
+(EFPAR (npar) (     valpar     )
+(----------------------------------------------------------------------
+DEFPAR #At                   1.5
+DEFPAR #bp                  0.05
+DEFPAR #bt                 0.383
+DEFPAR #Dt                   1.5
+DEFPAR #Gmax                 1.0
+DEFPAR #Gmin                -1.0
+DEFPAR #PBmaq              418.5
+DEFPAR #PBtur              397.6
+DEFPAR #Qnl                  0.2
+DEFPAR #Tg                  0.18
+DEFPAR #Tp                   1.0
+DEFPAR #Tr                  6.83
+DEFPAR #Ts                   0.4
+DEFPAR #Tw                   1.5
+DEFPAR #Ty                 0.017
+DEFPAR #Ymax                 1.0
+DEFPAR #Ymin                -1.0
+(
+(----------------------------------------------------------------------
+(nb) (tipo) (stip)s(vent) (vsai) ( p1 )( p2 )( p3 )( p4 ) (vmin) (vmax)
+(----------------------------------------------------------------------
+0001 IMPORT DWMAQ         Dw
+0002 IMPORT PELE          Pe
+0003 LEDLAG        X26    X3     #bp      0.0   1.0#Tp
+0004 SOMA         -X3     X4
+                  -Dw     X4
+                  -X7     X4
+0005 PROINT        X4     X5        1.0   0.0#Ty
+0006 WSHOUT        X5     X6     #Tr      1.0#Tr
+0007 GANHO         X6     X7     #bt
+0008 LIMITA        X5     X8                              Ymin   Ymax
+0009 SOMA          X8     X9
+                  -X12    X9
+0010 LEDLAG        X9     X10       1.0   0.0   1.0#Ts
+0011 PROINT        X10    X11       1.0   0.0#Tg
+0012 LIMITA        X11    X12                             Gmin   Gmax
+0013 DIVSAO        X17    X13
+                   X12    X13
+0014 FUNCAO X**2   X13    X14
+0015 FUNCAO RETA   X14    X15      -1.0   1.0
+0017 PROINT        X15    X17       1.0   0.0#Tw
+0018 FUNCAO RETA   X17    X18       1.0-#Qnl
+0020 MULTPL        X18    X20
+                   X14    X20
+0021 GANHO         X20    X21    #At
+0022 GANHO         Dw     X22    #Dt
+0023 SOMA          Pm0    X23
+                  -X22    X23
+                   X21    X23
+0024 ENTRAD               Pm0
+0025 EXPORT PMEC   Pmec
+0026 SOMA          X27    X26
+                  -Pm0    X26
+0027 FRACAO        Pe     X27    #PBmaq      #PBtur
+0028 FRACAO        X23    Pmec   #PBtur      #PBmaq
+(
+(----------------------------------------------------------------------
+(DEFVA (stip) (vdef) ( d1 )
+(----------------------------------------------------------------------
+DEFVAL        Gmax   #Gmax
+DEFVAL        Gmin   #Gmin
+DEFVAL VAR    Pm0    X23
+DEFVAL        Ymax   #Ymax
+DEFVAL        Ymin   #Ymin
+(
+FIMCDU
+(
+(----------------------------------------------------------------------
+(ncdu) ( nome cdu )
+   876 ES_S.OSORIO
+(----------------------------------------------------------------------
+(EFPAR (npar) (     valpar     )
+(----------------------------------------------------------------------
+DEFPAR #A1                111.28
+DEFPAR #A2                 7.436
+DEFPAR #A3                  20.0
+DEFPAR #A4                  0.03
+DEFPAR #A5                   0.1
+DEFPAR #Aex                 0.13
+DEFPAR #B2                  8.21
+DEFPAR #B3                 -8.21
+DEFPAR #Bex                 0.03
+DEFPAR #KI                   3.4
+DEFPAR #Kp                   2.7
+DEFPAR #Kq1                1.955
+DEFPAR #Kq2                  3.3
+DEFPAR #W0                  10.0
+DEFPAR #W02                 100.
+(
+(----------------------------------------------------------------------
+(nb) (tipo) (stip)s(vent) (vsai) ( p1 )( p2 )( p3 )( p4 ) (vmin) (vmax)
+(----------------------------------------------------------------------
+0001 IMPORT DWMAQ         Dw
+0002 GANHO         Dw     X2     #A1
+0003 LEDLAG        X2     X3        1.0         1.0#A4
+0004 WSHOUT        X3     X4     #Kq1     1.0#Kq1
+0005 WSHOUT        X4     X5     #Kq2     1.0#Kq2
+0006 IMPORT PELE          Pe
+0007 GANHO         Pe     X7     #A2
+0008 WSHOUT        X7     X8     #Kp      1.0#Kp
+0009 LEDLAG        X8     X9     #KI            1.0#KI
+0010 SOMA          X5     X10
+                   X9     X10
+0011 LEDLAG        X10    X11       1.0         1.0#A5
+0012 POL(S)        X11    X12       0.0   1.0   0.0#W02
+                                    0.0   1.0#W0   #W02
+0013 SOMA          X12    X13
+                  -X9     X13
+0014 LEDLAG        X13    X14       1.0#Aex     1.0#Bex
+0015 LEDLAG        X14    X15       1.0#Aex     1.0#Bex
+0016 GANHO         X15    X16    #A3
+0017 LIMITA        X16    X17                             B3     B2
+0018 IMPORT VTR           Vt
+0019 FUNCAO PULSO  Vt     X19     0.001   2.0   1.1   0.0
+0020 FUNCAO RETA   X19    X20       1.0-1.999
+0021 GANHO         X20    X21    10000.
+0022 PROINT        X21    X22       1.0         1.0       Lmin   Lmax
+0023 DELAY         X22    X23
+0024 ENTRAD               Zero
+0025 SELET2        Zero   Vsad
+                   X17    Vsad
+                   X23    Vsad
+0026 EXPORT VSAD   Vsad
+(
+(----------------------------------------------------------------------
+(DEFVA (stip) (vdef) ( d1 )
+(----------------------------------------------------------------------
+DEFVAL        B2     #B2
+DEFVAL        B3     #B3
+DEFVAL        Lmax    0.001
+DEFVAL        Lmin     -1.0
+DEFVAL        X22     0.001
+DEFVAL        Zero      0.0
+(
+FIMCDU
+(
+(----------------------------------------------------------------------
+(ncdu) ( nome cdu )
+   880 ES_SSANTIAGO
+(----------------------------------------------------------------------
+(EFPAR (npar) (     valpar     )
+(----------------------------------------------------------------------
+DEFPAR #A2                 8.851
+DEFPAR #B2                 0.065
+DEFPAR #B3                -0.065
+DEFPAR #Kp                  0.21
+DEFPAR #Te                   0.1
+DEFPAR #Tq                  2.75
+(
+(----------------------------------------------------------------------
+(nb) (tipo) (stip)s(vent) (vsai) ( p1 )( p2 )( p3 )( p4 ) (vmin) (vmax)
+(----------------------------------------------------------------------
+0001 IMPORT DWMAQ         Dw
+0002 LEDLAG        Dw     X2        1.0         1.0  0.03
+0003 LEDLAG        X2     X3        1.0#Kp      1.0#Te
+0004 LEDLAG        X3     X4        1.0#Kp      1.0#Te
+0005 WSHOUT        X4     X5     #Tq      1.0#Tq
+0006 GANHO         X5     X6     #A2
+0007 LIMITA        X6     X7                              B3     B2
+0008 IMPORT VTR           Vt
+0009 FUNCAO PULSO  Vt     X9      0.001   2.0   1.1   0.0
+0010 FUNCAO RETA   X9     X10       1.0-1.999
+0011 GANHO         X10    X11    10000.
+0012 PROINT        X11    X12       1.0         1.0       Lmin   Lmax
+0013 DELAY         X12    X13
+0014 ENTRAD               Zero
+0015 SELET2        Zero   Vsad
+                   X7     Vsad
+                   X13    Vsad
+0016 EXPORT VSAD   Vsad
+(
+(----------------------------------------------------------------------
+(DEFVA (stip) (vdef) ( d1 )
+(----------------------------------------------------------------------
+DEFVAL        B2     #B2
+DEFVAL        B3     #B3
+DEFVAL        Lmax    0.001
+DEFVAL        Lmin     -1.0
+DEFVAL        X12     0.001
+DEFVAL        Zero      0.0
+(
+FIMCDU
+(
+(----------------------------------------------------------------------
+(ncdu) ( nome cdu )
+   882 ES_ITA
+(----------------------------------------------------------------------
+(EFPAR (npar) (     valpar     )
+(----------------------------------------------------------------------
+DEFPAR #TR                  0.02 Measuring filter time constant
+DEFPAR #T1                  0.02 Active power measuring time constant
+DEFPAR #T3                  0.02 Frequency variation measuring time constant
+DEFPAR #T7                   2.0 Parameter P-filter
+DEFPAR #T9                   0.1 Parameter "Ramp-Tracking Filter"
+DEFPAR #TW1                  2.0 Wash-out Dw signal parameter
+DEFPAR #TW2                  2.0 Wash-out Dw signal parameter
+DEFPAR #TW3                  2.0 Wash-out Pe signal parameter
+DEFPAR #TL1                 0.20 Lead-lag parameter
+DEFPAR #TL2                 0.04 Lead-lag parameter
+DEFPAR #TL3                 0.36 Lead-lag parameter
+DEFPAR #TL4                 0.12 Lead-lag parameter
+DEFPAR #KS1                  4.0 Amplification factor
+DEFPAR #KS2                  0.2 Amplification factor
+DEFPAR #KS3                  1.0 Amplification factor
+DEFPAR #Lmin                -0.1 Minimum value of stabilizing signal
+DEFPAR #Lmax                 0.1 Maximum value of stabilizing signal
+DEFPAR #P0%                -0.85 Reactive power max. at 0% P
+DEFPAR #P20%               -0.75 Reactive power max. at 20% P
+DEFPAR #P40%               -0.65 Reactive power max. at 40% P
+DEFPAR #P60%               -0.55 Reactive power max. at 60% P
+DEFPAR #P80%               -0.46 Reactive power max. at 80% P
+DEFPAR #P100%              -0.35 Reactive power max. at 100% P
+DEFPAR #Kp/q                0.05 Limiter gain reduction factor
+DEFPAR #Xd                 110.0 Generator direct axis reactance (%)
+(
+(----------------------------------------------------------------------
+(nb) (tipo) (stip)s(vent) (vsai) ( p1 )( p2 )( p3 )( p4 ) (vmin) (vmax)
+(----------------------------------------------------------------------
+0001 IMPORT DWMAQ         Dw
+0002 IMPORT PELE          Pe
+0003 LEDLAG        Dw     X3        1.0         1.0#T3
+0004 LEDLAG        X3     X4        1.0         1.0#T3
+0005 WSHOUT        X4     X5     #TW1     1.0#Tw1
+0006 WSHOUT        X5     X6     #TW2     1.0#Tw2
+0007 LEDLAG        Pe     Pef       1.0         1.0#T1
+0008 WSHOUT        Pef    X8     #TW3     1.0#Tw3
+0009 LEDLAG        X8     X9     #KS2           1.0#T7
+0010 GANHO         X9     X10    #KS3
+0011 SOMA          X6     X11
+                   X10    X11
+0012 LEDLAG        X11    X12       1.0         1.0#T9
+0013 LEDLAG        X12    X13       1.0         1.0#T9
+0014 LEDLAG        X13    X14       1.0         1.0#T9
+0015 LEDLAG        X14    X15       1.0         1.0#T9
+0016 LEDLAG        X15    X16       1.0         1.0#T9
+0017 SOMA          X16    X17
+                  -X9     X17
+0018 GANHO         X17    X18    #KS1
+0019 LEDLAG        X18    X19       1.0#TL1     1.0#TL2   Lmin   Lmax
+0020 LEDLAG        X19    X20       1.0#TL3     1.0#TL4   Lmin   Lmax
+0021 MAX           X20    X21
+                   X79    X21
+0022 LIMITA        X21    Vsad                            Lmin   Lmax
+0024 EXPORT VSAD   Vsad
+0068 IMPORT VOLT          Vt
+0069 IMPORT QELE          Qe
+0070 LEDLAG        Vt     Vtf       1.0         1.0#TR
+0071 FUNCAO PONTOS Pef    X71      0.00#P0%    0.20#P20%
+                                   0.40#P40%   0.60#P60%
+                                   0.80#P80%   1.00#P100%
+0072 LEDLAG        Qe     Qef       1.0         1.0#T1
+0073 FUNCAO X**2   Vtf    X73
+0074 FUNCAO RETA   X73    X74      -1.0   1.0
+0075 FRACAO        X74    X75     100.0      #Xd
+0076 FRACAO        X75    X76       1.0         1.1
+0077 SOMA          X71    X77
+                  -Qef    X77
+                  -X76    X77
+0078 GANHO         X77    X78    #Kp/q
+0079 FUNCAO PONTOS X78    X79     -0.01 -0.10-0.005 -0.05
+                                   0.00  0.00 1.e101.e-10
+(
+(----------------------------------------------------------------------
+(DEFVA (stip) (vdef) ( d1 )
+(----------------------------------------------------------------------
+DEFVAL        Lmin   #Lmin
+DEFVAL        Lmax   #Lmax
+(
+FIMCDU
+(
+(----------------------------------------------------------------------
+(ncdu) ( nome cdu )
+   885 ES_Machadinh
+(----------------------------------------------------------------------
+(EFPAR (npar) (     valpar     )
+(----------------------------------------------------------------------
+DEFPAR #Tw1                  3.0
+DEFPAR #Tw2                  3.0
+DEFPAR #T1                 9.688
+DEFPAR #T2                   0.8
+DEFPAR #T3                   0.2
+DEFPAR #T4                   3.0
+DEFPAR #T5                  0.50    0.3         0.50
+DEFPAR #T6                  0.05    0.02        0.05
+DEFPAR #T7                  0.50    1.0         0.50
+DEFPAR #T8                  0.05    1.0         0.05
+DEFPAR #K                   15.0    10.0        15.0
+DEFPAR #Lmin                -1.0
+DEFPAR #Lmax                 1.0
+(
+(----------------------------------------------------------------------
+(nb) (tipo) (stip)s(vent) (vsai) ( p1 )( p2 )( p3 )( p4 ) (vmin) (vmax)
+(----------------------------------------------------------------------
+0001 IMPORT PELE          Pe
+0002 IMPORT DWMAQ         Dw
+0003 WSHOUT        Pe     X3     #Tw1     1.0#Tw1
+0004 PROINT        X3     X4        1.0      #T1
+0005 WSHOUT        Dw     X5     #Tw2     1.0#Tw2
+0006 SOMA          X4     X6
+                   X5     X6
+0007 LEDLAG        X6     X7        1.0#T2      1.0#T3
+0008 LEDLAG        X7     X8        1.0         1.0#T3
+0009 LEDLAG        X8     X9        1.0         1.0#T3
+0010 LEDLAG        X9     X10       1.0         1.0#T3
+0011 SOMA          X10    X11
+                  -X4     X11
+0012 WSHOUT        X11    X12    #T4      1.0#T4
+0013 LEDLAG        X12    X13       1.0#T5      1.0#T6
+0014 LEDLAG        X13    X14       1.0#T7      1.0#T8
+0015 GANHO         X14    X15    #K
+0016 LIMITA        X15    Vsad                            Lmin   Lmax
+0017 EXPORT VSAD   Vsad
+(
+(----------------------------------------------------------------------
+(DEFVA (stip) (vdef) ( d1 )
+(----------------------------------------------------------------------
+DEFVAL        Lmin   #Lmin
+DEFVAL        Lmax   #Lmax
+DEFVAL        X4        0.0
+(
+FIMCDU
+(
+999999
+(
+FIM

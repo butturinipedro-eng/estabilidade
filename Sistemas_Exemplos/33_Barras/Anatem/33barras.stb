@@ -1,0 +1,207 @@
+( --------------------------------------------------------------------------
+( ***  SISTEMA-TESTE BRASILEIRO DE 33 BARRAS  ***  CASO BASE  ***
+(
+( Arquivo no formato do programa ANATEM para estudo de estabilidade
+( eletromecanica
+(
+( --------------------------------------------------------------------------
+(
+(===============================================================================
+( TITULO DO CASO
+(===============================================================================
+TITU
+Sistema-Teste 33 Barras - Perda da LT 500kV Salto Santiago-Ita
+(
+(===============================================================================
+( DADOS DE OPCOES DEFAULT DE EXECUCAO
+(===============================================================================
+DOPC IMPR
+(Op) E (Op) E (Op) E (Op) E (Op) E (Op) E (Op) E (Op) E (Op) E (Op) E
+CONT L 80CO L FILE L IMPR L
+999999
+(
+(===============================================================================
+( ASSOCIACAO DE ARQUIVO PARA SAIDA DE RELATORIOS ( opcao FILE )
+(===============================================================================
+(
+DARQ IMPR
+(Tipo) (C) ( Nome do Arquivo   
+OUT        .\out\    
+LOG        .\log\
+PLT        .\plt\
+SAV    2   ..\Anarede\33BARRAS.SAV
+BLT        BD33.BLT
+CDU        BD33.CDU
+999999
+(
+(===============================================================================
+( DADOS DE MAQUINAS E ASSOCIACAO DAS MAQUINAS AOS CONTROLES
+(===============================================================================
+DMAQ
+( Nb)   Gr (P) (Q) Und ( Mg ) ( Mt )u( Mv )u( Me )u(Xvd)(Nbc)
+  800   10 100 100   3    700    700u   740u   770u       800          GBMUNHOZ-3GR
+  904   10 100 100   5    808    812u   852u   882u       904          ITA------5GR
+  915   10 100 100   2    815    815u   855u   885u       915          MACHADIN-2GR
+  808   10 100 100   4    702    706u   746u   776u       808          SCAXIAS--4GR
+  810   10 100 100   4    702    704u   744u   774u       810          SSEGREDO-4GR
+  919   10 100 100   4    805    806u   846u   876u       919          SOSORIO--4GR
+  925   10 100 100   3    807    810u   850u   880u       925          SSANTIAG-3GR
+999999
+(
+(===============================================================================
+( DADOS DE EVENTOS
+(===============================================================================
+DEVT IMPR
+(Tp) ( Tempo)( El )( Pa)Nc( Ex) ( % ) (ABS ) Gr Und         (Bl)P ( Rc ) ( Xc ) ( Bc ) (Defas)
+(
+( Curto em S. Santiago 500KV com abertura da LT 500KV S. Santiago - Ita
+(
+(Tp) ( Tempo)( El )( Pa)Nc( Ex) ( % ) (ABS ) Gr Und         (Bl)P ( Rc ) ( Xc ) ( Bc ) (Defas)
+APCB 0.100   1060                                                        0.100
+RMCB 0.200   1060
+ABCI 0.200   1060    995 1
+(
+999999
+(
+(===============================================================================
+( DADOS DE REPRESENTACAO DA CARGA
+(===============================================================================
+DCAR IMPR
+(tp) ( no) C (tp) ( no) C (tp) ( no) C (tp) ( no)   (A) (B) (C) (D) (Vmn)
+AREA     1                                            0  75   0 100    50
+AREA     2                                            0  75   0 100    50
+999999
+(
+(===============================================================================
+( DADOS PARA PLOTAGEM
+(===============================================================================
+DPLT
+(
+( Angulo das Maquinas
+(
+(Tipo)M( El ) ( Pa) Nc Gp ( Br) Gr ( Ex) (Bl) P
+DELT      808          10   800 10                 S.Caxias   X G.B.Munhoz
+DELT      810          10   800 10                 S.Segredo  X G.B.Munhoz
+DELT      919          10   800 10                 S.Osorio   X G.B.Munhoz
+DELT      925          10   800 10                 S.Santiago X G.B.Munhoz
+DELT      904          10   800 10                 Ita        X G.B.Munhoz
+DELT      915          10   800 10                 Machadinho X G.B.Munhoz
+DELT      919          10   808 10                 S.Osorio   X S.Caxias
+(
+( Frequência das Maquinas
+(
+(Tipo)M( El ) ( Pa) Nc Gp ( Br) Gr ( Ex) (Bl) P
+FMAQ      808          10                          S.Caxias     G.B.Munhoz
+FMAQ      810          10                          S.Segredo               
+FMAQ      919          10                          S.Osorio               
+FMAQ      925          10                          S.Santiago             
+FMAQ      904          10                          Ita                     
+FMAQ      915          10                          Machadinho              
+FMAQ      919          10                          S.Osorio
+FMAQ      800          10                          G.B.Munhoz             
+(
+( Tensoes das Maquinas
+(
+(Tipo)M( El ) ( Pa) Nc Gp ( Br) Gr ( Ex) (Bl) P
+VOLT      800                                      G.B.Munhoz
+VOLT      808                                      S.Caxias
+VOLT      810                                      S.Segredo
+VOLT      904                                      Ita
+VOLT      915                                      Machadinho
+VOLT      919                                      S.Osorio
+VOLT      925                                      S.Santiago
+(
+( Tensoes das Rede de 500kV
+(
+(Tipo)M( El ) ( Pa) Nc Gp ( Br) Gr ( Ex) (Bl) P
+VOLT      814                                      Bateias
+VOLT      824                                      G.B.Munhoz
+VOLT      839                                      Cascavel-230
+VOLT      840                                      Cascavel-138
+VOLT      848                                      Foz do Chopin
+VOLT      856                                      Segredo
+VOLT      898                                      Foz do Chopin-230
+VOLT      933                                      Areia
+VOLT      895                                      Bateias
+VOLT      959                                      Curitiba
+VOLT      938                                      Blumenau
+VOLT      955                                      C.Novos
+VOLT     1030                                      Machadinho
+VOLT      995                                      Ita
+VOLT      964                                      Caxias
+VOLT      976                                      Gravatai
+VOLT     1060                                      S.Santiago
+VOLT      897                                      S.Caxias
+VOLT      896                                      Cascavel do Oeste
+(
+( Fluxo de Potencia Ativa nas Linhas
+(
+(Tipo)M( El ) ( Pa) Nc Gp ( Br) Gr ( Ex) (Bl) P
+FLXA      824   933  1               824
+FLXA      824   933  2               824
+FLXA      933   856  1               856
+FLXA     1060   856  1              1060
+FLXA      897  1060  1               897
+(
+( Potencia Eletrica nas Maquinas - Ativa
+(
+(Tipo)M( El ) ( Pa) Nc Gp ( Br) Gr ( Ex) (Bl) P
+PELE      800          10                          G.B.Munhoz
+PELE      808          10                          S.Caxias
+PELE      810          10                          S.Segredo
+PELE      904          10                          Ita
+PELE      915          10                          Machadinho
+PELE      919          10                          S.Osorio
+PELE      925          10                          S.Santiago
+(
+( Potencia Eletrica nas Maquinas - Reativa
+(
+(Tipo)M( El ) ( Pa) Nc Gp ( Br) Gr ( Ex) (Bl) P
+QELE      800          10                          G.B.Munhoz
+QELE      808          10                          S.Caxias
+QELE      810          10                          S.Segredo
+QELE      904          10                          Ita
+QELE      915          10                          Machadinho
+QELE      919          10                          S.Osorio
+QELE      925          10                          S.Santiago
+(
+( Potencia Mecanica nas Maquinas
+(
+(Tipo)M( El ) ( Pa) Nc Gp ( Br) Gr ( Ex) (Bl) P
+PMEC      800          10                          G.B.Munhoz
+PMEC      808          10                          S.Caxias
+PMEC      810          10                          S.Segredo
+PMEC      904          10                          Ita
+PMEC      915          10                          Machadinho
+PMEC      919          10                          S.Osorio
+PMEC      925          10                          S.Santiago
+(
+( Potencia Acelerante
+(
+(Tipo)M( El ) ( Pa) Nc Gp ( Br) Gr ( Ex) (Bl) P
+PACE      800          10                          G.B.Munhoz
+PACE      808          10                          S.Caxias
+PACE      810          10                          S.Segredo
+PACE      904          10                          Ita
+PACE      915          10                          Machadinho
+PACE      919          10                          S.Osorio
+PACE      925          10                          S.Santiago
+(
+999999
+(
+(===============================================================================
+( DADOS DE SIMULACAO
+(===============================================================================
+DSIM
+( Tmax ) (Stp) ( P ) ( I )
+    20.0 0.003     1
+(
+(===============================================================================
+( EXECUCAO DA SIMULACAO
+(===============================================================================
+EXSI ECHO
+(
+(===============================================================================
+( FIM DA SIMULACAO
+(===============================================================================
+FIM
