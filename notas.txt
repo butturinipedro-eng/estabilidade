@@ -1,0 +1,3 @@
+.STB: script do anatem, associação de modelos aos elementos de rede
+.BLT: Built-in-> modelos compilados no ANATEM, não podemos mudar. Ex: máquinas elétricas
+.CDU: Controle Definido por Usuário -> modelos customizados
